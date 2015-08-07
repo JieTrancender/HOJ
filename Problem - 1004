@@ -1,0 +1,48 @@
+//#include "stdafx.h"
+#include <iostream>
+#include <string>
+#include <map>
+#include <algorithm>
+#include <iterator>
+
+using namespace std;
+
+int main()
+{
+	int n;
+	string str;
+	map<string, int> coll;
+	while (cin >> n)
+	{
+		if (n == 0)
+			continue;
+		coll.clear();
+		while (n--)
+		{
+			cin >> str;
+			if (!coll.insert(make_pair(str,1)).second)
+			{
+				coll[str]++;
+			}
+		}
+		auto it = coll.begin();
+		str = it->first;
+		int count = it->second;
+		++it;
+		for (; it != coll.end(); ++it)
+		{
+			if (it->second > count)
+			{
+				count = it->second;
+				str = it->first;
+			}
+		}
+		cout << str << endl;
+		
+// 		for (auto i = coll.begin(); i != coll.end(); ++i)
+// 		{
+// 			cout << i->first << ' ' << i->second << endl;
+// 		}
+	}
+	return 0;
+}
