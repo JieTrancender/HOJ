@@ -1,0 +1,46 @@
+//#include "stdafx.h"
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+	int t, n, max, before, begin, end, now, before_begin, number = 1;
+	cin >> t;
+	while (t--)
+	{
+		cin >> n;
+		for (int i = 1; i <= n; ++i)
+		{
+			cin >> now;
+			if (i == 1)
+			{
+				max = before = now;
+				before_begin = begin = end = i;
+			}
+			else
+			{
+				if (now > now + before)
+				{
+					before = now;
+					before_begin = i;
+				}
+				else
+				{
+					before += now;
+				}
+			}
+			if (before > max)
+			{
+				max = before;
+				begin = before_begin;
+				end = i;
+			}
+		}
+		if (number != 1)
+			cout << endl;
+		cout << "Case " << number++ << ':' << endl;
+		cout << max << ' ' << begin << ' ' << end << endl;
+	}
+	return 0;
+}
