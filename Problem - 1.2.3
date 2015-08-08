@@ -1,0 +1,30 @@
+//#include "stdafx.h"
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+	int T;
+	cin >> T;
+	while (T--)
+	{
+		int num[10] = { 0 },n,m,sum = 1,len = 0;
+		cin >> n;
+		m = n % 10;
+		for (int i = 0; i < n; ++i)
+		{
+			sum *= m;
+			sum %= 10;
+			for (int j = 0; j < len; ++j)
+			{
+				if (num[j] == sum)
+					goto END;
+			}
+			num[len++] = sum;
+		}
+	END:
+		cout << num[(n + len - 1) % len] << endl;
+	}
+	return 0;
+}
