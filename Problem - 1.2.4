@@ -1,0 +1,49 @@
+//#include "stdafx.h"
+#include <iostream>
+#include <string>
+#include <vector>
+#include <iterator>
+#include <iomanip>
+
+using namespace std;
+
+int main()
+{
+	string str;
+	vector<char> v;
+	while (getline(cin,str))
+	{
+		bool flag = true;
+		float sum = 0;
+		for (int i = 0; i < str.size(); ++i)
+		{
+			if (str[i] >= 'A' && str[i] <= 'F' && str[i] != 'E')
+			{
+				v.push_back(str[i]);
+			}
+			else if (str[i] == ' ')//防止字母间有多个空格
+			{
+				continue;
+			}
+			else
+			{
+				flag = false;
+				break;
+			}
+		}
+		if (!flag)
+		{
+			cout << "Unknown letter grade in input\n";
+			v.clear();//大坑啊，一开始一直过不了都是因为这里对vector的size未清零。。。
+			continue;
+		}
+		for (vector<char>::iterator i = v.begin(); i != v.end(); ++i)
+		{
+			if (*i <= 'D')
+				sum += 'D' - *i + 1;
+		}
+		cout << setiosflags(ios_base::fixed) << setprecision(2) << sum * 1.0 / v.size() << endl;
+		v.clear();
+	}
+	return 0;
+}
